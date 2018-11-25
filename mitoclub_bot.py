@@ -6,10 +6,6 @@ bot = telebot.TeleBot(access_token)
 SPREADSHEET_ID = '18c-03qAYD0RELLXv1b7G-dJkPgFQOCI2jP19CCh0a2U'
 RANGE_NAME = 'Class Data!A1:E'
 
-
-
-@bot.message_handler(content_types=['text'])
-
 def get_content():
 	store = file.Storage('token.json')
 	creds = store.get()
@@ -23,12 +19,18 @@ def get_content():
 
 	numRows = result.get('values') if result.get('values') is not None else "Wow, such empty!"
 	text = "\n".join(["".join(i) for i in numRows])
-	#join rows and return
+	return text
 
+everything = get_content()
 
+@bot.message_handler(content_types=['text'])
 def send_everything(message):
-	everything = get_content()
-    bot.send_message(message.chat.id, everything)
+	updates = bot.get_updates()
+	if updates.text == "everything":
+    	bot.send_message(message.chat.id, everything)
+	else:
+		bot.send_message(message.chat.id, message.text)
+
 
 if __name__ == '__main__':    
     while True:
