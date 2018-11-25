@@ -1,25 +1,34 @@
 import telebot
-#import traceback
-#import time
-#from telebot import apihelper
-#import logging
 
 access_token = '700467919:AAF5CYn06UHUGMoTTRsl0YSiriq-9l3GD0c'
-# Создание бота с указанным токеном доступа
 bot = telebot.TeleBot(access_token)
 
-# Logger
-#logger = telebot.logger
-#telebot.logger.setLevel(logging.DEBUG)
+SPREADSHEET_ID = '18c-03qAYD0RELLXv1b7G-dJkPgFQOCI2jP19CCh0a2U'
+RANGE_NAME = 'Class Data!A1:E'
 
-# Configuration
-#TG_PROXY = 'https://103.241.156.250:8080'
-# Set proxy
-#apihelper.proxy = {'http': TG_PROXY}
+
 
 @bot.message_handler(content_types=['text'])
-def echo(message):
-    bot.send_message(message.chat.id, message.text)
+
+def get_content():
+	store = file.Storage('token.json')
+	creds = store.get()
+    if not creds or creds.invalid:
+        flow = client.flow_from_clientsecrets('credentials.json', SCOPES)
+        creds = tools.run_flow(flow, store)
+	service = build('sheets', 'v4', http=creds.authorize(Http()))
+
+	result = service.spreadsheets().values().get(
+    spreadsheetId=SPREADSHEET_ID, range="A1").execute()
+
+	numRows = result.get('values') if result.get('values') is not None else "Wow, such empty!"
+	text = "\n".join(["".join(i) for i in numRows])
+	#join rows and return
+
+
+def send_everything(message):
+	everything = get_content()
+    bot.send_message(message.chat.id, everything)
 
 if __name__ == '__main__':    
     while True:
