@@ -5,27 +5,24 @@ from httplib2 import Http
 from oauth2client import file, client, tools
 
 SPREADSHEET_ID = '18c-03qAYD0RELLXv1b7G-dJkPgFQOCI2jP19CCh0a2U'
-RANGE_NAME = 'Class Data!A1:E'
+RANGE_NAME = '!A1:E'
 
 # Delete old
 # Insert new
 # Remind every week
 
-def get_content():
-	store = file.Storage('token.json')
-	creds = store.get()
-	service = build('sheets', 'v4', http=creds.authorize(Http()))
 
-	result = service.spreadsheets().values().get(spreadsheetId=SPREADSHEET_ID, range="A1").execute()
+store = file.Storage('token.json')
+creds = store.get()
+service = build('sheets', 'v4', http=creds.authorize(Http()))
+result = service.spreadsheets().values().get(spreadsheetId=SPREADSHEET_ID, range=RANGE_NAME).execute()
+numRows = result.get('values') if result.get('values') is not None else "Wow, such empty!"
+everything = "\n".join(["".join(i) for i in numRows])
 
-	numRows = result.get('values') if result.get('values') is not None else "Wow, such empty!"
-	text = "\n".join(["".join(i) for i in numRows])
-	return text
-
-everything = get_content()
 
 access_token = '700467919:AAF5CYn06UHUGMoTTRsl0YSiriq-9l3GD0c'
 bot = telebot.TeleBot(access_token)
+
 
 while 1:
     time.sleep(5)
