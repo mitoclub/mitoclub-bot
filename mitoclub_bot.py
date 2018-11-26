@@ -13,7 +13,7 @@ from sheet_interaction import *
 # next week month
 
 everything = get_everything()
-everything = "Here are all the upcoming meetings listed by deadline order:\n\n"
+everything = "Here are all the upcoming meetings listed by deadline order:\n\n" + everything
 bot = telebot.TeleBot(bot_access_token)
 
 while 1:
