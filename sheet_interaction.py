@@ -1,4 +1,4 @@
-def get_everything()
+def get_everything():
 	RANGE_NAME = '!A1:E'
 	store = file.Storage('token.json')
 	creds = store.get()
