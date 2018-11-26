@@ -25,6 +25,10 @@ while 1:
         @bot.message_handler(commands=['everything'])
         def send_everything(message):
             bot.send_message(message.chat.id, response.down)
+        # Reaction to text
+        @bot.message_handler(content_types=['text'])
+        def send_welcome(message):
+            bot.send_message(message.chat.id, response.down)
 
         if __name__ == '__main__':
             bot.polling(none_stop=False, interval=0, timeout=20)
