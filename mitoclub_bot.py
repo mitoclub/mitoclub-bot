@@ -22,6 +22,10 @@ while 1:
         def send_welcome(message):
             bot.send_message(message.chat.id, response.welcome)
 
+        @bot.message_handler(commands=['help'])
+        def send_welcome(message):
+            bot.send_message(message.chat.id, response.help_message)
+
         @bot.message_handler(commands=['everything'])
         def send_everything(message):
             bot.send_message(message.chat.id, everything)
