@@ -11,5 +11,7 @@ def get_everything():
 	service = build('sheets', 'v4', http=creds.authorize(Http()))
 	result = service.spreadsheets().values().get(spreadsheetId=SPREADSHEET_ID, range=RANGE_NAME).execute()
 	numRows = result.get('values') if result.get('values') is not None else "Wow, such empty!"
+	numRows = numRows[1:]
 	everything = "\n".join(["\t".join(i) for i in numRows])
+	everything += "\n\n"
 	return everything
