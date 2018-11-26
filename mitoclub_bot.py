@@ -1,10 +1,7 @@
 import telebot
 import time
-from googleapiclient.discovery import build
-from httplib2 import Http
-from oauth2client import file, client, tools
 import response
-from config import bot_access_token, SPREADSHEET_ID
+from config import bot_access_token
 from sheet_interaction import *
 
 
