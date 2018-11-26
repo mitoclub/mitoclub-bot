@@ -4,27 +4,19 @@ from googleapiclient.discovery import build
 from httplib2 import Http
 from oauth2client import file, client, tools
 import response
+from config import bot_access_token, SPREADSHEET_ID
+from sheet_interaction import *
+
 
 # TODO
 # new command for certain dates?
 # Remind every week
 # Delete old
 # Insert new
+# next week month
 
-SPREADSHEET_ID = '18c-03qAYD0RELLXv1b7G-dJkPgFQOCI2jP19CCh0a2U'
-RANGE_NAME = '!A1:E'
-
-store = file.Storage('token.json')
-creds = store.get()
-store = file.Storage('token.json')
-service = build('sheets', 'v4', http=creds.authorize(Http()))
-result = service.spreadsheets().values().get(spreadsheetId=SPREADSHEET_ID, range=RANGE_NAME).execute()
-numRows = result.get('values') if result.get('values') is not None else "Wow, such empty!"
-everything = "\n".join(["\t".join(i) for i in numRows])
-
-access_token = '700467919:AAF5CYn06UHUGMoTTRsl0YSiriq-9l3GD0c'
-bot = telebot.TeleBot(access_token)
-
+everything = get_everything()
+bot = telebot.TeleBot(bot_access_token)
 
 while 1:
     time.sleep(5)
