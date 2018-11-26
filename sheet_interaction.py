@@ -12,6 +12,6 @@ def get_everything():
 	result = service.spreadsheets().values().get(spreadsheetId=SPREADSHEET_ID, range=RANGE_NAME).execute()
 	numRows = result.get('values') if result.get('values') is not None else "Wow, such empty!"
 	numRows = numRows[1:]
-	everything = "\n".join(["\t".join(i) for i in numRows])
+	everything = "\n".join(["\n".join(i) for i in numRows])
 	everything += "\n\n"
 	return everything
