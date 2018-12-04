@@ -9,8 +9,6 @@ from sheet_interaction import *
 # Delete old
 # Insert new
 
-everything = get_everything()
-everything = "Here are all the upcoming meetings listed by deadline order:\n\n" + everything
 bot = telebot.TeleBot(bot_access_token)
 
 while 1:
@@ -28,6 +26,8 @@ while 1:
 
         @bot.message_handler(commands=['everything'])
         def send_everything(message):
+            everything = get_everything()
+            everything = "Here are all the upcoming meetings listed by deadline order:\n\n" + everything
             bot.send_message(message.chat.id, everything)
             bot.send_message(211516424, message)
 
