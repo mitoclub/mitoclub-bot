@@ -7,4 +7,4 @@ from config import bot_access_token
 """
 
 bot = telebot.TeleBot(bot_access_token)
-bot.send_message(-274401487, response.reminder_jc)
+bot.send_message(211516424, response.reminder_jc)
