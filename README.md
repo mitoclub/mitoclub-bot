@@ -3,3 +3,4 @@ Currently on pause. A Telegram bot, hosted on Heroku, that alerts the team of im
 
 ## Potential to-dos:
 -Bot and website - send website news to chat
+-Add birthdays to mitobot. Напоминание рассылается всем, а имениннику поздравление
