@@ -1,4 +1,4 @@
-requests==2.10.0
+requests==2.20.0
 PyTelegramBotAPI==2.2.3
 datetime
 google-api-python-client 
