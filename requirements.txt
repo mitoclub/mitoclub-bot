@@ -1,6 +1,9 @@
-requests==2.20.0
-PyTelegramBotAPI==2.2.3
-datetime
+requests==2.34.2
+PyTelegramBotAPI==4.37.1
 google-api-python-client 
 oauth2client
 httplib2
+# Explicit minimum-safe transport dependencies, also used by requests.
+certifi==2026.10.23
+idna==3.20
+urllib3==2.8.0
